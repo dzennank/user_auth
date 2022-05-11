@@ -20,10 +20,18 @@ const Login = () => {
         setErrMsg('')
     }, [user, pwd])
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(user, pwd)
+        setUser('')
+        setPwd('')
+        setSuccess(true)
+    }
+
   return (
     <section>
         <h1>Sign in</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
         <label htmlFor="username">Username:</label>
              <input
             type="text"
@@ -34,7 +42,25 @@ const Login = () => {
             value={user}
             required
             />
+
+        <label htmlFor="username">Username:</label>
+             <input
+             id="password"
+            ref={userRef}
+            onChange={(e) => setPwd(e.target.value)}
+            value={pwd}
+            required
+            />
+            <button>Sign in</button>
+
         </form>
+        <p>
+            Need an Account?<br />
+            <span className="line">
+            {/*put router link here*/}
+            <a href="#">Sign Up</a>
+             </span>
+         </p>
     </section>
   )
 }
