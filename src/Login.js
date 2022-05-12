@@ -1,8 +1,10 @@
 import React from 'react'
-import { useRef, useState, useEffect } from 'react';
-
+import { useRef, useState, useEffect, useContext } from 'react';
+import AuthContext from './context/AuthProvider';
 
 const Login = () => {
+
+    const { setAuth } = useContext(AuthContext);
 
     const userRef = useRef();
     const errRef = useRef();
@@ -29,6 +31,16 @@ const Login = () => {
     }
 
   return (
+
+    <>
+        {success ? (
+            <section>
+                <h1>You are logged in!</h1>
+                <br></br>
+                <a href='#'>Go Home</a>
+            </section>
+        ): (
+    
     <section>
         <h1>Sign in</h1>
         <form onSubmit={handleSubmit}>
@@ -43,8 +55,9 @@ const Login = () => {
             required
             />
 
-        <label htmlFor="username">Username:</label>
+        <label htmlFor="password">Password:</label>
              <input
+             type="password"
              id="password"
             ref={userRef}
             onChange={(e) => setPwd(e.target.value)}
@@ -62,6 +75,8 @@ const Login = () => {
              </span>
          </p>
     </section>
+        ) } 
+        </>
   )
 }
 
